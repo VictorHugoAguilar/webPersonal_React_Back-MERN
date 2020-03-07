@@ -34,10 +34,10 @@ function addMenu(req, res) {
     });
 }
 
-function getMenus(req, res){
+function getMenus(req, res) {
 
     Menu.find()
-        .sort({order: 'asc'})
+        .sort({ order: 'asc' })
         .exec(
             (err, menuStored) => {
                 if (err) {
@@ -66,8 +66,81 @@ function getMenus(req, res){
         );
 }
 
+function updateMenu(req, res) {
+    let menuData = req.body;
+    const params = req.params;
+
+    Menu.findByIdAndUpdate(params.id, menuData, { new: true }, (err, menuUpdate) => {
+        if (err) {
+            res.status(500)
+                .send({
+                    ok: false,
+                    message: 'Error del servidor'
+                });
+        } else {
+            if (!menuUpdate) {
+                res.status(404)
+                    .send({
+                        ok: false,
+                        message: 'No se ha podido actualizar el menu'
+                    });
+            } else {
+                res.status(200)
+                    .send({
+                        ok: true,
+                        message: 'Lista de menus actualizada',
+                        menu: menuUpdate
+                    });
+            }
+        }
+    })
+}
+
+function activateMenu(req, res) {
+    const { id } = req.params;
+    const { active } = req.body;
+
+    Menu.findByIdAndUpdate(id, { active }, { new: true }, (err, menuUpdate) => {
+        if (err) {
+            res.status(500)
+                .send({
+                    ok: false,
+                    message: 'Error del servidor'
+                });
+        } else {
+            if (!menuUpdate) {
+                res.status(404)
+                    .send({
+                        ok: false,
+                        message: 'No se ha podido activar/desactivar el menu'
+                    });
+            } else {
+                if (active) {
+                    res.status(200)
+                        .send({
+                            ok: true,
+                            message: 'Menu Activado Correctamente',
+                            menu: menuUpdate
+                        });
+                } else {
+                    res.status(200)
+                        .send({
+                            ok: true,
+                            message: 'Menu Desactivado Correctamente',
+                            menu: menuUpdate
+                        });
+                }
+
+            }
+        }
+    })
+
+}
+
 
 module.exports = {
     addMenu,
-    getMenus
+    getMenus,
+    updateMenu,
+    activateMenu
 }
