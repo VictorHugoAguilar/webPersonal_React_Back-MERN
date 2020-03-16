@@ -20,7 +20,7 @@ function suscribeMail(req, res) {
                     .send({
                         ok: false,
                         code: 500,
-                        message: 'Error en el servidor'
+                        message: 'Error en el servidor, email repetido'
                     })
             } else {
                 if (!newsletterStored) {
@@ -29,7 +29,7 @@ function suscribeMail(req, res) {
                         .send({
                             ok: false,
                             code: 404,
-                            message: 'No se ha podido registrar, email repetido'
+                            message: 'No se ha podido registrar'
                         })
                 } else {
                     res
