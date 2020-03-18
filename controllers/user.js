@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('../services/jwt.js');
-const User = require('../models/user');
 const moment = require('moment');
 const geoip = require('geoip-lite');
 const fs = require('fs');
 const path = require('path');
 
+const User = require('../models/user');
 
 function signUp(req, res) {
     const user = new User();
