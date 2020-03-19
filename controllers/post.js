@@ -3,7 +3,7 @@ const moment = require('moment');
 
 
 function getPosts(req, res) {
-    const { page = 1, limit = 10 } = req.query;
+    const { page , limit = 10 } = req.query;
 
     const options = {
         page: page,
@@ -18,7 +18,7 @@ function getPosts(req, res) {
             if (!postsStored) {
                 res.status(404).send({ ok: false, code: 404, message: 'No se ha encontrado ningún post' });
             } else {
-                res.status(200).send({ ok: true, code: 200, message: 'Post creado correctamente', posts: postsStored });
+                res.status(200).send({ ok: true, code: 200, message: 'Post recuperados correctamente', posts: postsStored });
             }
         }
     });

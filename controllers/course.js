@@ -107,9 +107,6 @@ function updateCourse(req, res){
     const courseData = req.body;
     const id = req.params.id;
 
-    console.log(id)
-    console.log(courseData)
-
     Course.findByIdAndUpdate(id, courseData, { new: true, safe: true}, (err, courseUpdate) => {
         if (err) {
             res.status(500)

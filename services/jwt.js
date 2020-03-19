@@ -13,7 +13,6 @@ exports.createAccessToken = (user) =>{
         createToken: moment().unix(),
         exp: moment().add(3, "hours").unix(),
     }
-    // console.log(jwt.encode(payload, SECRET_KEY));
     return jwt.encode(payload, SECRET_KEY);
 }
 

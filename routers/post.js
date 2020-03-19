@@ -13,6 +13,4 @@ api.put('/update-post/:id',[md_auth.ensureAuth], PostController.updatePost);
 api.delete('/delete-post/:id',[md_auth.ensureAuth], PostController.deletePost);
 api.get('/get-post/:url', PostController.getPost);
 
-
-
 module.exports = api;
